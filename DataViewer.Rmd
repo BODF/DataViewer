@@ -1,0 +1,53 @@
+---
+title: "DataViewer"
+author: "BODF"
+date: "12/26/2018"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(plotly)
+```
+
+## Motivation  
+I work in a biochemistry lab and we often have to fit equations to data and 
+determine the goodness of fit. In this set of slides I show a plotly plot that 
+allows the user to zoom in on fitted data to determine how good the fit is.
+
+## Background
+
+- Our data involve protein to protein binding interactions
+    + Understanding the nature of these interactions can aid in drug development 
+- If you are unfamiliar with 'binding', then think of it like taste. If you have 
+a glass of tea and you add some sugar to it, small amounts of sugar will have 
+only a little effect on the flavor. As you add more and more sugar eventually 
+the tea will be sweet. If you add even more sugar, eventually the tea will be so 
+sweet that you will hardly notice the difference as you add more sugar. 
+    + This mirrors what we see with molecular binding. As one binding partner is 
+    added, there is little change at first, then a large change in the % bound, 
+    followed by a saturation of binding.
+
+## Equation used for fitting the data  
+
+This equation was used to fit the data on the next slide:  
+$Fraction\ Bound = \frac{X}{K_a + X}$, whereby $X$ is the concentration of a 
+binding partner (the glucocorticoid receptor in this plot) and $K_a$ is the 
+affinity constant--an empirical value that describes how strongly two proteins 
+interact.
+
+The fitted $K_a$ is 15.6 $Molar^{-1}$.
+
+## Plot  
+```{r plot}
+data <- read.csv("~/Documents/My_Research/Hilser_Lab/Steady State Anisotropy/C3-halfGRE_global.csv")
+fit <- read.csv("~/Documents/My_Research/Hilser_Lab/Steady State Anisotropy/c3-fit_halfGRE.csv")
+p <- plot_ly(data = data, x = ~Conc, y = ~Frac, type = "scatter", 
+             mode = "markers", name = "Data") %>%
+        add_lines(data = fit, x = ~Conc, y = ~Frac, name = "Fitted Line") %>%
+        layout(xaxis = list(type = 'log', 
+                            title = "Protein Concentration (Molar)", 
+                            exponentformat = "E"), 
+               yaxis = list(title = "Fraction of DNA Bound"))
+p
+```
