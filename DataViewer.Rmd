@@ -15,6 +15,10 @@ I work in a biochemistry lab and we often have to fit equations to data and
 determine the goodness of fit. In this set of slides I show a plotly plot that 
 allows the user to zoom in on fitted data to determine how good the fit is.
 
+```{r date, echo = TRUE}
+date()
+```
+
 ## Background
 
 - Our data involve protein to protein binding interactions
