@@ -35,7 +35,7 @@ sweet that you will hardly notice the difference as you add more sugar.
 ## Equation used for fitting the data  
 
 This equation was used to fit the data on the next slide:  
-$Fraction\ Bound = \frac{X}{K_a + X}$, whereby $X$ is the concentration of a 
+$Fraction\ Bound = \frac{X*K_a}{1 + X*K_a}$, whereby $X$ is the concentration of a 
 binding partner (the glucocorticoid receptor in this plot) and $K_a$ is the 
 affinity constant--an empirical value that describes how strongly two proteins 
 interact.
